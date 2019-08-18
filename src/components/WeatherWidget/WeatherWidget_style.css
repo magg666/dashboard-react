@@ -1,0 +1,72 @@
+body {
+  background-image: url("http://www.minutemanups.com/blog/wp-content/uploads/2014/03/Storm-Clouds-54.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Roboto", sans-serif;
+}
+
+#app-container {
+  position: relative;
+}
+
+#weather-container, #forecast-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  background: rgba(0,0,0,0.7);
+  color: rgb(200,200,200);
+  border: 2px solid rgb(200,200,200);
+  border-radius: 10px;
+}
+
+#header {
+  font-size: 30px;
+  margin-top: 20px;
+}
+
+.location {
+  text-align: right;
+}
+
+#weather-icon-container, #current-temp-container {
+  font-size: 120px;
+  text-align: center;
+}
+
+#extra-weather {
+  font-size: 20px;
+  text-align: center;
+}
+
+.extra-weather-item {
+  margin-bottom: 10px;
+}
+
+#five-day {
+  font-size: 35px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.btn-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.btn {
+  font-size: 20px;
+  background: rgba(0,0,0,0.6);
+  color: rgb(200,200,200);
+}
+
+.btn:hover {
+  background: rgba(0,0,0,0.3);
+}
+
+@media screen and (max-width: 760px) {
+  .title, .location {
+    text-align: center;
+  }
+}
