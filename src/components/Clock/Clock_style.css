@@ -1,0 +1,25 @@
+.clock-container {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: #383838;
+}
+.clock-wrapper {
+    padding: 20px;
+}
+
+.time-text {
+    font-size: 50px;
+    color: #e59400
+}
+
+.days-text {
+    color: #e59400;
+    font-size: 25px;
+    padding-bottom: 0
+}
+.caption-text {
+    color: #e59400;
+    font-size: 25px;
+    float: right;
+}
