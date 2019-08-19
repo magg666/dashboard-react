@@ -3,9 +3,14 @@ hr{
   margin-bottom: 1rem;
   border: 0;
   border-top: 1px solid white;
-
 }
 
+.left{
+  float: left;
+}
+.right {
+  float: right;
+}
 #weather-container{
   position: absolute;
   width: 30%;
@@ -32,6 +37,11 @@ hr{
   font-size: 80px;
   text-align: center;
 }
+#summary-container {
+  padding: 30px 5px;
+  font-size: 35px;
+  text-align: center;
+}
 
 #extra-weather {
   font-size: 20px;
@@ -42,26 +52,6 @@ hr{
   margin-bottom: 10px;
 }
 
-#five-day {
-  font-size: 35px;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.btn-container {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.btn {
-  font-size: 20px;
-  background: rgba(0,0,0,0.6);
-  color: rgb(200,200,200);
-}
-
-.btn:hover {
-  background: rgba(0,0,0,0.3);
-}
 
 @media screen and (max-width: 760px) {
   .title, .location {
