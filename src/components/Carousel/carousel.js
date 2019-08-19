@@ -13,17 +13,19 @@ export const ControlledCarousel = props => {
         setDirection(e.direction);
     };
     const GitHubTableOnPanel = PanelHoc(GitHubTable);
+    const FunPanel = PanelHoc(WeatherWidget);
 
 
     return (
         /* interval={10000} activeIndex={index} */
         <div  direction={direction} onSelect={handleSelect}  >
             {/*<Carousel.Item>*/}
-                <WeatherWidget/>
+                <FunPanel/>
             {/*</Carousel.Item>*/}
             {/*<Carousel.Item>*/}
             {/*    <GitHubTableOnPanel/>*/}
             {/*</Carousel.Item>*/}
+
             <Carousel.Item>
                 <div className="container">
                     <p>rrrrrrrrrrrrr</p>
