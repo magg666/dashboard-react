@@ -1,11 +1,18 @@
 import React from "react";
 import SimpleTable from "../SimpleTable/SimpleTable";
-import {formatRepositoryData} from "./GitHubTable_container";
+import {fetchGitHubData} from "./GitHubTable_container";
 
+/**
+ * Table with statistic from GitHub for CodeCool20171
+ */
+// todo - add spinner-loading functionality
 class GitHubTable extends React.Component {
-
+    /**
+     * Initial parameters for GitHubTable state
+     * @type {{columns: *[], title: string, rows: []}}
+     */
     state = {
-        title : "CodeCool Github Statistic",
+        title: "CodeCool Github Statistic",
         columns: [
             {title: 'Name', field: 'name'},
             {title: 'Language', field: 'language'},
@@ -13,79 +20,32 @@ class GitHubTable extends React.Component {
             {title: 'Last commit', field: 'pushed_at'},
             {title: 'Amount of branches', field: 'branch'},
             {title: 'Contributors', field: 'contributors'},
-            {title: 'Main branch commited:', field: 'total'},
+            {title: 'Main branch committed:', field: 'total'},
         ],
         rows: []
     };
 
-    async fetchGitHubData() {
-        let repoResponse = await fetch('https://api.github.com/users/CodecoolWAW20171/repos', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/vnd.github.inertia-preview+json',
-                'Authorization': process.env.REACT_APP_GITHUB_KEY
-            }
-        });
-        let repoData = await repoResponse.json();
-        let repoList = formatRepositoryData(Array.from(repoData));
-
-        let nameList = [];
-        for (let i = 0; i < repoList.length; i++) {
-            nameList.push(repoList[i].name);
-        }
-        for (let i = 0; i < nameList.length; i++) {
-            let branchesResponse = await fetch(`https://api.github.com/repos/CodecoolWAW20171/${nameList[i]}/branches`, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/vnd.github.inertia-preview+json',
-                    'Authorization': process.env.REACT_APP_GITHUB_KEY
-                }
-            });
-            let branches = await branchesResponse.json();
-            repoList[i].branch = branches.length
-        }
-        for (let i = 0; i < nameList.length; i++) {
-            let contributorResponse = await fetch(`https://api.github.com/repos/CodecoolWAW20171/${nameList[i]}/contributors`, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/vnd.github.inertia-preview+json',
-                    'Authorization': process.env.REACT_APP_GITHUB_KEY
-                }
-            });
-            let contributors = await contributorResponse.json();
-            repoList[i].contributors = contributors.length
-        }
-        for (let i = 0; i < nameList.length; i++) {
-            let commitResponse = await fetch(`https://api.github.com/repos/CodecoolWAW20171/${nameList[i]}/stats/commit_activity`, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/vnd.github.inertia-preview+json',
-                    'Authorization': process.env.REACT_APP_GITHUB_KEY
-                }
-            });
-            let commits = await commitResponse.json();
-            let commitsList = Array.from(commits);
-            let total = 0;
-            commitsList.forEach(function (commit) {
-                total += commit.total;
-                return total
-            });
-            repoList[i].total = total;
-            this.setState({rows: repoList})
-        }
-    }
-
+    // todo add interval
+    /**
+     * Fetches data on mounting component
+     */
     componentDidMount() {
-        this.fetchGitHubData()
-            .catch(err => console.log(err));
-        this.timer = setInterval(() => this.fetchGitHubData(), 3600000)
+        fetchGitHubData()
+            .then(res => this.setState({rows: res}))
+            .catch(err => console.log(err))
     }
 
+    /**
+     * On un-mounting resets timer
+     */
     componentWillUnmount() {
-        this.timer = null;
-        clearInterval()
+        clearInterval(this.timer)
     }
 
+    /**
+     * render SimpleTable component with GitHubTable data
+     * @returns {*}
+     */
     render = () => <SimpleTable columns={this.state.columns} rows={this.state.rows} title={this.state.title}/>
 }
 
