@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import Carousel from 'react-bootstrap/Carousel'
-import GitHubTable from "./GitHubTable/GitHubTable";
-import PanelHoc from "./Panel/Panel";
+import GitHubTable from "../GitHubTable/GitHubTable";
+import WeatherWidget from "../WeatherWidget/WeatherWidget";
+import PanelHoc from "../Panel/Panel";
 
-
+// todo - all components. For now beta for testing purposes
 export const ControlledCarousel = props => {
     const [index, setIndex] = useState(0);
     const [direction, setDirection] = useState(null);
@@ -18,22 +19,11 @@ export const ControlledCarousel = props => {
         /* interval={10000} activeIndex={index} */
         <div  direction={direction} onSelect={handleSelect}  >
             {/*<Carousel.Item>*/}
-                <GitHubTableOnPanel/>
+                <WeatherWidget/>
             {/*</Carousel.Item>*/}
-            <Carousel.Item>
-                <div className="container">
-                    <p>UUUUUU</p>
-                    <p>UUUUUU</p>
-                    <p>UUUUUU</p>
-                    <p>UUUUUU</p>
-                    <p>UUUUUU</p>
-                    <p>UUUUUU</p>
-                </div>
-                <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
+            {/*<Carousel.Item>*/}
+            {/*    <GitHubTableOnPanel/>*/}
+            {/*</Carousel.Item>*/}
             <Carousel.Item>
                 <div className="container">
                     <p>rrrrrrrrrrrrr</p>
@@ -51,8 +41,6 @@ export const ControlledCarousel = props => {
                 </Carousel.Caption>
             </Carousel.Item>
         </div>
-
-
     )
 };
 
