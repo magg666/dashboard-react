@@ -1,3 +1,31 @@
+
+/**
+ * Formats time into format (HH:MM:SS)
+ * @param {number} hour
+ * @param {number} minutes
+ * @param {number} seconds
+ * @returns {string}
+ */
+
+export function formatTime(hour, minutes, seconds) {
+    if (seconds < 10) {
+        seconds = '0' + seconds;
+    }
+    if (minutes < 10) {
+        minutes = '0' + minutes;
+    }
+    if (hour < 10) {
+        hour = '0' + hour;
+    }
+    return hour + ':' + minutes + ':' + seconds
+}
+
+/**
+ * Formats date as day - number, month - name, year - number
+ * @param dateString
+ * @returns {string}
+ */
+// The function works, but 'format' looks like error.
 export function formatDate(dateString) {
     let date = new Date(dateString);
     return new Intl.DateTimeFormat('en-GB', {
@@ -7,7 +35,11 @@ export function formatDate(dateString) {
     }).format(date)
 }
 
-
+/**
+ * Function to sort list of objects by indicated parameters
+ * Very nice, from internet...
+ * @type {sortBy}
+ */
 export const sortBy = (function () {
     let toString = Object.prototype.toString,
         // default parser function
