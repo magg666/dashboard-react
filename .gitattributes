@@ -1,0 +1,7 @@
+# Ignore all test and documentation with “export-ignore”.
+.gitattributes export-ignore
+.gitignore export-ignore
+README.md export-ignore
+
+*.css linguist-vendored
+*.js linguist-detectable=true
