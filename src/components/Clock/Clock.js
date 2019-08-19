@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import {formatTime} from "./Clock_container";
+import {formatTime} from "../utils";
 import './Clock_style.css'
-import {Captions} from "./Clock_container";
+import {Captions} from "./Captions";
 
 /**
  * Clock component with day name, time and captions with time (HH:MM) remaining to define event
