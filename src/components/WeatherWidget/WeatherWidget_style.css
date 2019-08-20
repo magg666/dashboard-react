@@ -1,60 +1,67 @@
-hr{
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  border: 0;
-  border-top: 1px solid white;
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid white;
 }
 
-.left{
-  float: left;
+.left {
+    float: left;
 }
+
 .right {
-  float: right;
+    float: right;
 }
-#weather-container{
-  position: absolute;
-  width: 30%;
-  top: 0;
-  left: 0;
-  margin-top: 0;
-  margin-bottom: 5%;
-  background: black;
-  color: whitesmoke;
-  border: 2px solid rgb(200,200,200);
-  border-radius: 10px;
+
+#app-container {
+    display: flex;
+    height: 500px;
+    width: 600px;
+    margin: 5px;
+}
+
+#weather-container {
+    margin-top: 0;
+    margin-left: 0;
+    /*margin-bottom: 5%;*/
+    background: black;
+    color: whitesmoke;
+    border: 2px solid rgb(200, 200, 200);
+    border-radius: 10px;
 }
 
 #header {
-  font-size: 30px;
-  margin-top: 20px;
+    font-size: 30px;
+    margin-top: 20px;
 }
 
 .location {
-  text-align: right;
+    text-align: right;
 }
 
 #weather-icon-container, #current-temp-container {
-  font-size: 80px;
-  text-align: center;
+    font-size: 80px;
+    text-align: center;
 }
+
 #summary-container {
-  padding: 30px 5px;
-  font-size: 35px;
-  text-align: center;
+    padding: 30px 5px;
+    font-size: 35px;
+    text-align: center;
 }
 
 #extra-weather {
-  font-size: 20px;
-  text-align: center;
+    font-size: 20px;
+    text-align: center;
 }
 
 .extra-weather-item {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 
 @media screen and (max-width: 760px) {
-  .title, .location {
-    text-align: center;
-  }
+    .title, .location {
+        text-align: center;
+    }
 }

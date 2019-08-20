@@ -49,20 +49,18 @@ export default class WeatherWidget extends React.Component {
     render() {
         return (
             <div>
-                <div className="container" id="app-container">
-                    <div className="row">
-                        <div className="col-sm-8 col-xs-10" id="weather-container">
-                            <WeatherHeader time={this.state.currentDayWeather.time}/>
-                            <hr/>
-                            <WeatherMain temperature={this.state.currentDayWeather.temperature}
-                                         summary={this.state.currentDayWeather.summary}
-                                         icon={this.state.currentDayWeather.icon}/>
-                            <hr/>
-                            <WeatherBottom humidity={this.state.currentDayWeather.humidity}
-                                           windSpeed={this.state.currentDayWeather.windSpeed}
-                                           pressure={this.state.currentDayWeather.pressure}/>
-                            <hr/>
-                        </div>
+                <div id="app-container">
+                    <div className="col-sm-12 col-xs-10" id="weather-container">
+                        <WeatherHeader time={this.state.currentDayWeather.time}/>
+                        <hr/>
+                        <WeatherMain temperature={this.state.currentDayWeather.temperature}
+                                     summary={this.state.currentDayWeather.summary}
+                                     icon={this.state.currentDayWeather.icon}/>
+                        <hr/>
+                        <WeatherBottom humidity={this.state.currentDayWeather.humidity}
+                                       windSpeed={this.state.currentDayWeather.windSpeed}
+                                       pressure={this.state.currentDayWeather.pressure}/>
+                        <hr/>
                     </div>
                 </div>
             </div>

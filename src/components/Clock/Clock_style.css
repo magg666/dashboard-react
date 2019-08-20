@@ -2,24 +2,30 @@
     width: 100%;
     justify-content: center;
     align-items: center;
-    background-color: #383838;
+    background-color: black;
+
 }
+
 .clock-wrapper {
     padding: 20px;
 }
 
 .time-text {
     font-size: 50px;
-    color: #e59400
+    color: #e59400;
+    margin-left: 20px;
 }
 
 .days-text {
     color: #e59400;
     font-size: 25px;
-    padding-bottom: 0
+    padding-bottom: 0;
+    margin-left: 20px;
 }
+
 .caption-text {
     color: #e59400;
     font-size: 25px;
     float: right;
+    margin-right: 20px;
 }
