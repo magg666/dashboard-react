@@ -10,9 +10,9 @@ class App extends Component {
                 <div>
                     <ControlledCarousel/>
                 </div>
-                {/*<div>*/}
-                {/*    <Clock/>*/}
-                {/*</div>*/}
+                <div>
+                    <Clock/>
+                </div>
             </React.Fragment>
         )
     }

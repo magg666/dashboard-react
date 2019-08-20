@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import Carousel from 'react-bootstrap/Carousel'
 import GitHubTable from "../GitHubTable/GitHubTable";
-import WeatherWidget from "../WeatherWidget/WeatherWidget";
 import PanelHoc from "../Panel/Panel";
+import InfoPage from "../InfoPage/InfoPage";
+
 
 // todo - all components. For now beta for testing purposes
 export const ControlledCarousel = props => {
@@ -13,14 +14,15 @@ export const ControlledCarousel = props => {
         setDirection(e.direction);
     };
     const GitHubTableOnPanel = PanelHoc(GitHubTable);
-    const FunPanel = PanelHoc(WeatherWidget);
+    const InfoPanel = PanelHoc(InfoPage);
+
 
 
     return (
         /* interval={10000} activeIndex={index} */
         <div  direction={direction} onSelect={handleSelect}  >
             {/*<Carousel.Item>*/}
-                <FunPanel/>
+                <InfoPanel/>
             {/*</Carousel.Item>*/}
             {/*<Carousel.Item>*/}
             {/*    <GitHubTableOnPanel/>*/}
