@@ -5,7 +5,7 @@ import {formatDate} from "../utils";
  * @param stamp - unix timestamp
  * @returns {string} DD month YYYY
  */
-let time = stamp => formatDate(stamp*1000);
+let time = stamp => formatDate(stamp * 1000);
 
 /**
  * Rounds temperature
@@ -19,7 +19,7 @@ let temperature = temp => Math.round(temp);
  * @param {number}hum number from 0 to 1
  * @returns {number}
  */
-let humidity = hum => hum * 100;
+let humidity = hum => Math.round(hum * 100);
 
 /**
  * Rounds pressure
@@ -33,31 +33,31 @@ let pressure = press => Math.round(press);
  * @param {string }icon
  * @returns {string} image-icon-name
  */
-function getWeatherIcon(icon){
-  switch(icon){
-    case "clear-day":
-      return "day-sunny";
-    case "clear-night":
-      return "night-clear";
-    case "cloudy":
-      return "day-cloudy";
-    case "partly-cloudy-night":
-      return "night-cloudy";
-    case "rain":
-      return "rain";
-    case "snow":
-      return "snow";
-    case "sleet":
-      return "sleet";
-    case "wind":
-      return "windy";
-    case "fog":
-      return "fog";
-    case "partly-cloudy-day":
-      return "day-cloudy";
-    default:
-      return "meteor";
-  }
+function getWeatherIcon(icon) {
+    switch (icon) {
+        case "clear-day":
+            return "day-sunny";
+        case "clear-night":
+            return "night-clear";
+        case "cloudy":
+            return "day-cloudy";
+        case "partly-cloudy-night":
+            return "night-cloudy";
+        case "rain":
+            return "rain";
+        case "snow":
+            return "snow";
+        case "sleet":
+            return "sleet";
+        case "wind":
+            return "windy";
+        case "fog":
+            return "fog";
+        case "partly-cloudy-day":
+            return "day-cloudy";
+        default:
+            return "meteor";
+    }
 }
 
 /**

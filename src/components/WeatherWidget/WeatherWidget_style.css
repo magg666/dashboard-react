@@ -16,7 +16,7 @@ hr {
 #app-container {
     display: flex;
     height: 500px;
-    width: 600px;
+    /*width: 600px;*/
     margin: 5px;
 }
 
@@ -65,3 +65,4 @@ hr {
         text-align: center;
     }
 }
+
