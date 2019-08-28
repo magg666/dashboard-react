@@ -1,20 +1,34 @@
 import React, {Component} from 'react';
 import './App.css';
-import {ControlledCarousel} from "./components/Carousel/carousel";
 import Clock from "./components/Clock/Clock";
+import {MiddleSuit} from "./components/Suites/MiddleSuit";
 
+/**
+ * Main app
+ */
 class App extends Component {
+    /**
+     * Renders theme suites accordingly to day
+     * @returns {*}
+     */
     render() {
-        return (
-            <React.Fragment>
-                <div>
-                    <ControlledCarousel/>
-                </div>
-                <div>
+        // today day
+        let day = new Date().getDay();
+
+        if (day === 1) {
+            return (
+                <div>It is Monday</div>
+            )
+        } else if (day === 4) {
+            return <div>it is Friday</div>
+        } else {
+            return (
+                <React.Fragment>
+                    <MiddleSuit/>
                     <Clock/>
-                </div>
-            </React.Fragment>
-        )
+                </React.Fragment>
+            )
+        }
     }
 }
 
