@@ -1,17 +1,22 @@
 import React from "react";
+import './InfoPage_style.css'
 import WeatherWidget from "../WeatherWidget/WeatherWidget";
 import {NasaImage} from "../NasaImage/NasaImage";
 import {NumberFactWidget} from "../NumberFactsWidget/NumberFactsWidget";
+import {Paper} from "@material-ui/core";
 
 
 export default function InfoPage() {
+    /**
+     * Groups all additional items for page and renders them
+     */
     return (
-        <React.Fragment>
-            <div style={{height: '80px'}}> some text</div>
-            <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+        <Paper className={'infoPaper'}>
+            <NumberFactWidget/>
+            <div className={'container-fluid infoContainer'}>
                 <WeatherWidget/>
                 <NasaImage/>
             </div>
-        </React.Fragment>
+        </Paper>
     )
 }
