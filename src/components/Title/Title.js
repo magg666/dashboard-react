@@ -10,10 +10,10 @@ export function Title(props) {
     let style = {
         'text': {
             width: "100%",
-            fontSize: '1.6em',
+            fontSize: '1.4em',
             textAlign: 'center',
             fontWeight: 'bolder',
-            padding: 10
+            paddingHorizontal: 10,
         }
     };
     return (

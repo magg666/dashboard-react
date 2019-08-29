@@ -60,9 +60,9 @@ export const MiddleSuit = () => {
                 githubWeekData.map((obj, bIndex) => {
                     return (
                         <Carousel.Item key={bIndex}>
-                            <Paper style={{height: 'calc(100vh - 115px)'}}>
+                            <Paper style={{height: 'calc(100vh - 100px)'}}>
                                 <Title key={obj.module} title={obj.module}/>
-                                <StackedBars key={bIndex * 5} data={obj.projects} height={(window.innerHeight - 200) / githubWeekData.length}/>
+                                <StackedBars key={bIndex * 5} data={obj.projects}/>
                             </Paper>
                         </Carousel.Item>
                     )

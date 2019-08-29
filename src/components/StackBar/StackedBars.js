@@ -10,7 +10,7 @@ export class StackedBars extends React.Component {
         if (this.props.data.length !== 0) {
             return (
                 this.props.data.map((obj, index) => {
-                    return <BarChart key={index} data={obj} size={this.props.height}/>
+                    return <BarChart key={index} data={obj} size={(window.innerHeight -185) / this.props.data.length}/>
                 })
             )
         } else {
@@ -105,7 +105,8 @@ class BarChart extends React.Component {
                     position: 'top',
                     horizontalAlign: 'left',
                     offsetX: 40
-                }
+                },
+
             },
             series:
                 this.props.data['users'].map((obj) => {
@@ -116,10 +117,7 @@ class BarChart extends React.Component {
 
     render() {
         return (
-            <div id="chart">
-                <Chart options={this.state.options} series={this.state.series} type="bar"
-                       height={this.props.size}/>
-            </div>
+                <Chart options={this.state.options} series={this.state.series} type="bar" height={(this.props.size)}/>
         );
     }
 }

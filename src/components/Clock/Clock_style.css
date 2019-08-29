@@ -3,11 +3,14 @@
     justify-content: center;
     align-items: center;
     background-color: black;
+    height: 100px;
+    position: sticky;
+    bottom: 0;
 
 }
 
 .clock-wrapper {
-    padding: 20px;
+    padding: 0 20px;
 }
 
 .time-text {

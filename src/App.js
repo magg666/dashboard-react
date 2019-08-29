@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Clock from "./components/Clock/Clock";
 import {MiddleSuit} from "./components/Suites/MiddleSuit";
+import BarChart from "./components/ColumnBar/ColumnBar";
 
 /**
  * Main app
@@ -15,11 +16,11 @@ class App extends Component {
         // today day
         let day = new Date().getDay();
 
-        if (day === 1) {
+        if (day === 2) {
             return (
-                <div>It is Monday</div>
+                <BarChart/>
             )
-        } else if (day === 4) {
+        } else if (day === 3) {
             return <div>it is Friday</div>
         } else {
             return (
