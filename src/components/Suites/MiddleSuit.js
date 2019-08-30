@@ -52,7 +52,7 @@ export const MiddleSuit = () => {
      */
     useEffect(() => {
         getGithubWeeklyData().catch(err => console.log(err))
-    });
+    },[]);
 
     return (
         <Carousel interval={null} activeIndex={index} direction={direction} onSelect={handleSelect}>

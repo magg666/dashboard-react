@@ -32,6 +32,7 @@ class BarChart extends React.Component {
 
         this.state = {
             options: {
+
                 chart: {
                     stacked: true,
                 },
