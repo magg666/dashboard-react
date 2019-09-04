@@ -4,8 +4,19 @@ import Carousel from "react-bootstrap/Carousel";
 import {Paper} from "@material-ui/core";
 import {Title} from "../Title/Title";
 import ColumnBar from "../ColumnBar/ColumnBar";
+import {Celebration} from "../CelebrationScreen/Celebration";
 
 
+/**
+ * Component groups elements for end of week to display.
+ * Renders:
+ * 1. Info Page
+ * 2. Total Github Statistic
+ * 3. Celebration screen
+ *
+ * @returns {*}
+ * @constructor
+ */
 export const FinishSuit = () => {
 
     // this is hook for processed gitHub data
@@ -98,6 +109,9 @@ export const FinishSuit = () => {
             }
             <Carousel.Item>
                 <InfoPage/>
+            </Carousel.Item>
+            <Carousel.Item>
+                <Celebration/>
             </Carousel.Item>
         </Carousel>
     )

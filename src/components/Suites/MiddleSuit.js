@@ -4,12 +4,14 @@ import Carousel from "react-bootstrap/Carousel";
 import {StackedBars} from "../StackBar/StackedBars";
 import {Paper} from "@material-ui/core";
 import {Title} from "../Title/Title";
+import {Calendar} from "../Calendar/Calendar";
 
 /**
  * Component groups elements for middle of week to display.
  * Renders:
  * 1. GitHub Weekly Statistic
  * 2. Info Page
+ * 3. Calendar Info
  *
  * @returns {*}
  * @constructor
@@ -52,7 +54,7 @@ export const MiddleSuit = () => {
      */
     useEffect(() => {
         getGithubWeeklyData().catch(err => console.log(err))
-    },[]);
+    }, []);
 
     return (
         <Carousel interval={null} activeIndex={index} direction={direction} onSelect={handleSelect}>
@@ -70,6 +72,14 @@ export const MiddleSuit = () => {
             }
             <Carousel.Item>
                 <InfoPage/>
+            </Carousel.Item>
+            <Carousel.Item>
+                <Calendar amount={6} clientId={process.env.REACT_APP_GOOGLE_CLIENT}
+                          calendarId={process.env.REACT_APP_CALENDAR_STUDENTS} title={"CODECOOL EVENTS"}/>
+            </Carousel.Item>
+            <Carousel.Item>
+                <Calendar amount={10} clientId={process.env.REACT_APP_GOOGLE_CLIENT}
+                          calendarId={process.env.REACT_APP_CALENDAR_CONSULTATION} title={"CODECOOL CONSULTATIONS"}/>
             </Carousel.Item>
         </Carousel>
     )
