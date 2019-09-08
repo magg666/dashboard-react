@@ -9,6 +9,23 @@ import {StartSuit} from "./components/Suites/StartSuit";
  * Main app
  */
 class App extends Component {
+
+    /**
+     * Added refreshing page on resize
+     */
+    handleResize = () => {
+        window.location.reload();
+    };
+
+    componentDidMount() {
+        window.addEventListener('resize', this.handleResize)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.handleResize)
+    }
+
+
     /**
      *
      * Renders theme suites accordingly to day
@@ -25,7 +42,7 @@ class App extends Component {
                     <Clock/>
                 </React.Fragment>
             )
-        } else if (day === 4) {
+        } else if (day === 5) {
             return (
                 <React.Fragment>
                     <FinishSuit/>
