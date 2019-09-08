@@ -1,3 +1,5 @@
+import {useRef, useEffect} from "react";
+
 
 /**
  * Formats time into format (HH:MM:SS)
@@ -20,20 +22,40 @@ export function formatTime(hour, minutes, seconds) {
     return hour + ':' + minutes + ':' + seconds
 }
 
+// Functions below to format date and time
 /**
- * Formats date as day - number, month - name, year - number
+ * Formats date as indicated
  * @param dateString
  * @returns {string}
  */
-// The function works, but 'format' looks like error.
+
 export function formatDate(dateString) {
     let date = new Date(dateString);
     return new Intl.DateTimeFormat('en-GB', {
         year: 'numeric',
-        month: 'long',
+        month: 'short',
         day: '2-digit'
     }).format(date)
 }
+
+
+export function formatShortTime(dateString) {
+    let date = new Date(dateString);
+    return new Intl.DateTimeFormat('en-GB', {
+        hour: '2-digit',
+        minute: '2-digit'
+    }).format(date)
+}
+
+export function formatCalendarDate(dateString) {
+    let date = new Date(dateString);
+    return new Intl.DateTimeFormat('en-GB', {
+        weekday: 'long',
+        month: 'short',
+        day: '2-digit'
+    }).format(date)
+}
+
 
 /**
  * Function to sort list of objects by indicated parameters
@@ -77,9 +99,41 @@ export const sortBy = (function () {
 
 }());
 
-export function getMonday(d) {
-  d = new Date(d);
-  let day = d.getDay(),
-      diff = d.getDate() - day + (day === 0 ? -6 : 1);
-  return new Date(d.setDate(diff));
+/**
+ * Function gets last monday from given day.
+ * @param dateString
+ * @returns {Date}
+ */
+export function getMonday(dateString) {
+  dateString = new Date(dateString);
+  let day = dateString.getDay(),
+      diff = dateString.getDate() - day + (day === 0 ? -6 : 1);
+  return new Date(dateString.setDate(diff));
 }
+
+    /**
+     * useInterval Hook sets up an interval and clears it after unmounting
+     * credits: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
+     * @param callback
+     * @param delay
+     */
+export function useInterval(callback, delay) {
+        const savedCallback = useRef();
+
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            function tick() {
+                savedCallback.current();
+            }
+
+            if (delay !== null) {
+                let id = setInterval(tick, delay);
+                return () => clearInterval(id);
+            }
+        }, [delay]);
+    }
