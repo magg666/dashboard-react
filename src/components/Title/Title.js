@@ -10,7 +10,8 @@ export function Title(props) {
     let style = {
         'text': {
             width: "100%",
-            fontSize: '1.4em',
+            height: '5vh',
+            fontSize: '1.5rem',
             textAlign: 'center',
             fontWeight: 'bolder',
             paddingHorizontal: 10,

@@ -6,17 +6,38 @@ import Chart from 'react-apexcharts'
  * It is NOT typical stacked bar graph - data for it are from different sources
  */
 export class StackedBars extends React.Component {
+
+    /**
+     * Count projects which have users with commits. It's used to fit height of chart on page
+     * @param data - all projects for indicated module
+     * @returns {number}
+     */
+    countActiveProjects(data) {
+        let counter = 0;
+        // eslint-disable-next-line
+        for (let project of data) {
+            if (project['users'].length > 0) {
+                counter += 1
+            }
+        }
+        return counter
+
+    }
+
     render() {
         if (this.props.data.length !== 0) {
+            let counter = this.countActiveProjects(this.props.data);
             return (
                 this.props.data.map((obj, index) => {
-                    return <BarChart key={index} data={obj} size={(window.innerHeight -185) / this.props.data.length}/>
+                    if (obj.users.length !== 0) {
+                        return <BarChart key={index} data={obj} amount={counter}/>
+                    } else {
+                        return null
+                    }
                 })
             )
         } else {
-            return (
-                <div>There could be your project, but you did not send it...</div>
-            )
+            return null
         }
     }
 }
@@ -35,6 +56,7 @@ class BarChart extends React.Component {
 
                 chart: {
                     stacked: true,
+                    height: (0.7 * window.innerHeight) / this.props.amount
                 },
                 plotOptions: {
                     bar: {
@@ -49,7 +71,7 @@ class BarChart extends React.Component {
                     enabled: true,
                     textAnchor: 'middle',
                     style: {
-                        fontSize: '1em',
+                        fontSize: '1rem',
                         colors: ['#000']
                     },
                     formatter: function (value, {seriesIndex, w}) {
@@ -69,6 +91,7 @@ class BarChart extends React.Component {
                     text: [this.props.data['project']],
                     offsetX: '5px',
                     floating: true,
+                    margin: 0,
                     style: {
                         fontSize: '20px',
                         color: '#000',
@@ -76,17 +99,42 @@ class BarChart extends React.Component {
                     }
                 },
                 xaxis: {
-                    categories: [this.props.data['users'].reduce((a, b) => a + (b['commits'] || 0), 0)],
+                    show: false,
+                    showAlways: false,
+                    // categories: [this.props.data['users'].reduce((a, b) => a + (b['commits'] || 0), 0)],
                     labels: {
-                        formatter: function (val) {
-                            return Math.floor(val) + " commits"
-                        },
+                        show: false
+                        // formatter: function (val) {
+                        //     return Math.floor(val) + " commits"
+                        // },
+                    },
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false
+
                     }
                 },
                 yaxis: {
+                    crosshairs: {
+                        show: false
+                    },
+                    labels: {
+                        show: false
+                    },
+                    show: false,
+                    showAlways: false,
                     title: {
                         text: undefined
                     },
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false
+
+                    }
 
                 },
                 tooltip: {
@@ -94,6 +142,9 @@ class BarChart extends React.Component {
                         formatter: function (val) {
                             return val + " commits"
                         }
+                    },
+                    x: {
+                        show: false
                     }
                 },
                 fill: {
@@ -107,6 +158,23 @@ class BarChart extends React.Component {
                     horizontalAlign: 'left',
                     offsetX: 40
                 },
+                responsive: [{
+                    breakpoint: 1060,
+                    options: {
+                        title: {
+                            text: [this.props.data['project']],
+                            offsetX: '0',
+                            floating: true,
+                            margin: 0,
+                            style: {
+                                fontSize: '15px',
+                                color: '#000',
+
+                            },
+                        },
+
+                    },
+                }]
 
             },
             series:
@@ -118,7 +186,8 @@ class BarChart extends React.Component {
 
     render() {
         return (
-                <Chart options={this.state.options} series={this.state.series} type="bar" height={(this.props.size)}/>
+            <Chart options={this.state.options} series={this.state.series} type="bar"
+                   height={(this.state.options.chart.height)}/>
         );
     }
 }
