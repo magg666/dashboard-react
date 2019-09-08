@@ -23,18 +23,12 @@ export const NasaImage = () => {
                 justifyContent: "center",
                 border: '2px solid rgb(200, 200, 200)',
                 borderRadius: '10px',
-                height: '500px',
+                height: '65vh',
                 position: "relative"
             },
             img: {
-                width: '100%',
                 height: '100%',
                 objectFit: "contain"
-            },
-            iframe: {
-                width: 700,
-                height: '100%',
-                objectFit: "cover"
             },
             titleImg: {
                 position: "absolute",
@@ -70,31 +64,19 @@ export const NasaImage = () => {
      * Second parameter [] prevents rendering non-stop
      */
     useEffect(() => {
-        fetchNasaData().catch(err => console.log(err))
-
-
+        fetchNasaData().catch(err => console.log(err));
     }, []);
 
-
-    // renders widget
-    if (type === "video") { // nasa sometimes adds video from youtube
+    if (type === "image") {
         return (
             <div style={styles.container}>
                 <div style={styles.wrapper}>
-                    <iframe title={"video"} style={styles.iframe} src={image + '&playlist=""&loop=1&autoplay=1&mute=1'}/>
+                    <img alt={"Nasa of day"} style={styles.img}
+                         srcSet={image}/>
+                    <div className="title" style={styles.titleImg}>{title}</div>
                 </div>
             </div>
         )
-    } else if(type === "image"){
-        return (
-        <div style={styles.container}>
-            <div style={styles.wrapper}>
-                <img alt={"Nasa of day"} style={styles.img}
-                     srcSet={image}/>
-                <div className="title" style={styles.titleImg}>{title}</div>
-            </div>
-        </div>
-    )
     }
     // backup image
     else {
@@ -105,6 +87,6 @@ export const NasaImage = () => {
                     <div className="title" style={styles.titleImg}>Awesome dog from Nasa</div>
                 </div>
             </div>
-            )
+        )
     }
 };
