@@ -31,8 +31,8 @@ export const NumberFactWidget = () => {
      * Render component
      */
     return (
-        <div className="row" style={{textAlign: "center", height: 80, justifyContent: "center"}}>
-            <span style={{color: "#e59400", fontSize: 28, padding: 10}}>{number}</span>
+        <div className="row" style={{textAlign: "center", height: '5vh', justifyContent: "center"}}>
+            <span style={{color: "#e59400", padding: 20}}>{number}</span>
         </div>
     )
 };
