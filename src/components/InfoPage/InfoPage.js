@@ -11,9 +11,9 @@ export default function InfoPage() {
      * Groups all additional items for page and renders them
      */
     return (
-        <Paper className={'infoPaper'}>
+        <Paper className={'main-screen'} style={{backgroundColor: "black"}}>
             <NumberFactWidget/>
-            <div className={'container-fluid infoContainer'}>
+            <div className={'infoContainer'}>
                 <WeatherWidget/>
                 <NasaImage/>
             </div>

@@ -1,17 +1,6 @@
-.infoPaper {
-    background-color: black!important;
-    height: calc(100vh - 100px)
-}
-
 .infoContainer {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-    .infoContainer {
-        zoom: 0.75;
-        -moz-transform: scale(0.75);
-    }
+    margin: 10vh 5vh 10vh 5vh;
 }
