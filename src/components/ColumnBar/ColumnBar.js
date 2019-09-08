@@ -1,5 +1,7 @@
 import React from 'react';
 import Chart from 'react-apexcharts'
+import {Title} from "../Title/Title";
+import Paper from "@material-ui/core/Paper";
 
 /**
  * Column graph for total projects statistic in each module.
@@ -34,7 +36,7 @@ export default class BarChart extends React.Component {
 
             options: {
                 chart: {
-                    height: 350,
+                    height: 0.8 * window.innerHeight,
                     type: "line",
                     stacked: false
                 },
@@ -114,17 +116,20 @@ export default class BarChart extends React.Component {
                 legend: {
                     horizontalAlign: "left",
                     offsetX: 40
-                }
+                },
             }
         }
     }
 
     render() {
         return (
-            <div id="chart">
-                <Chart options={this.state.options} series={this.state.series} type="bar"
-                       height={(window.innerHeight - 120)}/>
-            </div>
+            <Paper className={'main-screen'}>
+                <Title title={this.props.title}/>
+                <div id="chart">
+                    <Chart options={this.state.options} series={this.state.series} type="bar"
+                           height={this.state.options.chart.height}/>
+                </div>
+            </Paper>
         )
     }
 }
