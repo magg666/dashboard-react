@@ -1,16 +1,23 @@
 import React, {useEffect, useState} from 'react'
 import {gapi} from 'gapi-script';
-import {checkIfAllDay, formatShortTime, formatCalendarDate} from "./Calendar_container";
+import {checkIfAllDay, countDays} from "./Calendar_container";
 import Table from "react-bootstrap/Table";
 import {Paper} from "@material-ui/core";
 import {Title} from "../Title/Title";
 import './Calendar_style.css'
+import {useInterval, formatShortTime, formatCalendarDate} from "../utils";
 
 
-
+/**
+ * Component Calendar to get data from Google Calendar and display it.
+ * @param props:
+ * @returns {*}
+ * @constructor
+ */
 export const Calendar = (props) => {
     // initial state
     let [eventsList, setEvents] = useState([]);
+
 
     /**
      * Asynchronously loads requested library and then
@@ -56,7 +63,6 @@ export const Calendar = (props) => {
             'maxResults': props.amount,
             'orderBy': 'startTime'
         }).execute(res => {
-            console.log(res.items);
             setEvents(res['items'])
         });
     }
@@ -69,36 +75,50 @@ export const Calendar = (props) => {
         // eslint-disable-next-line
     }, []);
 
+
+    /**
+     * Re-renders every 5 minutes
+     */
+    useInterval(() => {
+        handleClientLoad()
+    }, 300000);
+
+
     return (
-        <Paper style={{height: 'calc(100vh - 100px)'}}>
-            <div className="stars">
+        <Paper className={'main-screen'}>
+            <div className={props.stars}>
                 <div className={'tableCalendar'}>
-                 <Title title={props.title}/>
-                    <Table style={{margin: 20}} borderless >
-                        {eventsList.map(obj => {
-                            if (checkIfAllDay(obj)) {
+                    <Title title={props.title}/>
+                    <Table style={{margin: 20}} borderless>
+                        <tbody>
+                        {eventsList.map((event, index) => {
+                            if (checkIfAllDay(event)) {
                                 return (
-                                    <tr>
-                                        <td>{formatCalendarDate(obj.start.date)}</td>
+                                    <tr key={index}>
+                                        <td>{formatCalendarDate(event.start.date)}</td>
+                                        <td>{countDays(event.start.date)}</td>
                                         <td>All day</td>
-                                        <td>{obj.summary}</td>
+                                        <td style={{width: '40%'}}>{event.summary}</td>
                                     </tr>
                                 )
                             } else {
                                 return (
-                                    <tr>
-                                        <td>{formatCalendarDate(obj.start.dateTime)}</td>
-                                        <td>{formatShortTime(obj.start.dateTime)} - {formatShortTime(obj.end.dateTime)}</td>
-                                        <td>{obj.summary}</td>
+                                    <tr key={index}>
+                                        <td>{formatCalendarDate(event.start.dateTime)}</td>
+                                        <td>{countDays(event.start.dateTime)}</td>
+                                        <td>{formatShortTime(event.start.dateTime)} - {formatShortTime(event.end.dateTime)}</td>
+                                        <td style={{width: '40%'}}>{event.summary}</td>
                                     </tr>
                                 )
                             }
                         })}
+                        </tbody>
                     </Table>
+                    {props.additional ? <div style={{textAlign: 'center'}}><p>{props.additional}</p></div> : null}
                 </div>
             </div>
-            <div className="twinkling"/>
-            <div className="clouds"/>
+            <div className={props.twinkling}/>
+            <div className={props.clouds}/>
         </Paper>
     )
 };
