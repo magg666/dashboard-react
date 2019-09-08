@@ -29,18 +29,22 @@ export const StartSuit = () => {
     };
 
     return (
-        <Carousel interval={null} activeIndex={index} direction={direction} onSelect={handleSelect}>
+        <Carousel interval={null} activeIndex={index} direction={direction} onSelect={handleSelect} indicators={false}
+                  fade={true} pauseOnHover={false}>
 
             <Carousel.Item>
                 <InfoPage/>
             </Carousel.Item>
             <Carousel.Item>
                 <Calendar amount={6} clientId={process.env.REACT_APP_GOOGLE_CLIENT}
-                          calendarId={process.env.REACT_APP_CALENDAR_STUDENTS} title={"CODECOOL EVENTS"}/>
+                          calendarId={process.env.REACT_APP_CALENDAR_STUDENTS} title={"CODECOOL EVENTS"}
+                          stars={'stars2'} twinkling={'twinkling2'} clouds={'clouds2'}/>
             </Carousel.Item>
             <Carousel.Item>
                 <Calendar amount={10} clientId={process.env.REACT_APP_GOOGLE_CLIENT}
-                          calendarId={process.env.REACT_APP_CALENDAR_CONSULTATION} title={"CODECOOL CONSULTATIONS"}/>
+                          calendarId={process.env.REACT_APP_CALENDAR_CONSULTATION} title={"CODECOOL CONSULTATIONS"}
+                          stars={'stars'} twinkling={'twinkling'} clouds={'clouds'}
+                          additional={"Check slots for consultations and ruthlessly use your favourite mentor!"}/>
             </Carousel.Item>
         </Carousel>
     )

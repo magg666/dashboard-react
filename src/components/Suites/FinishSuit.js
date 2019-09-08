@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
 import InfoPage from "../InfoPage/InfoPage";
 import Carousel from "react-bootstrap/Carousel";
-import {Paper} from "@material-ui/core";
-import {Title} from "../Title/Title";
 import ColumnBar from "../ColumnBar/ColumnBar";
 import {Celebration} from "../CelebrationScreen/Celebration";
+import {useInterval} from "../utils";
 
 
 /**
@@ -58,6 +57,11 @@ export const FinishSuit = () => {
         getGithubTotalData().catch(err => console.log(err))
     }, []);
 
+    useInterval(() => {
+        getGithubTotalData().catch(err => console.log(err))
+    }, 60000);
+
+
     function getStats(array, statsType) {
         let projectsStats = [];
         array.projects.map(pr => {
@@ -69,7 +73,8 @@ export const FinishSuit = () => {
     }
 
     return (
-        <Carousel interval={null} activeIndex={index} direction={direction} onSelect={handleSelect}>
+        <Carousel interval={null} activeIndex={index} direction={direction} onSelect={handleSelect} indicators={false}
+                  fade={true} pauseOnHover={false}>
             {
                 githubTotalData.map((obj, bIndex) => {
                     if (obj['projects'].length !== 0) {
@@ -87,24 +92,13 @@ export const FinishSuit = () => {
 
                         return (
                             <Carousel.Item key={bIndex}>
-                                <Paper style={{height: 'calc(100vh - 100px)'}}>
-                                    <Title key={obj.module} title={obj.module}/>
-                                    <ColumnBar key={bIndex * 5} projectsTitles={projectsTitles} commits={commits}
-                                               additions={additions} deletions={deletions}/>
-                                </Paper>
+                                <ColumnBar key={bIndex * 5} projectsTitles={projectsTitles} commits={commits}
+                                           additions={additions} deletions={deletions} title={obj.module}/>
                             </Carousel.Item>
                         )
 
-                    } else {
-                        return (
-                            <Carousel.Item key={bIndex}>
-                                <Paper style={{height: 'calc(100vh - 100px)'}}>
-                                    <Title key={obj.module} title={obj.module}/>
-                                    <div>No projects</div>
-                                </Paper>
-                            </Carousel.Item>
-                        )
                     }
+                    return null
                 })
             }
             <Carousel.Item>

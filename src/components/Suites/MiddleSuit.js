@@ -5,6 +5,7 @@ import {StackedBars} from "../StackBar/StackedBars";
 import {Paper} from "@material-ui/core";
 import {Title} from "../Title/Title";
 import {Calendar} from "../Calendar/Calendar";
+import {useInterval} from "../utils";
 
 /**
  * Component groups elements for middle of week to display.
@@ -56,18 +57,27 @@ export const MiddleSuit = () => {
         getGithubWeeklyData().catch(err => console.log(err))
     }, []);
 
+    /**
+     * Refresh data every minute
+     */
+    useInterval(() => {
+        getGithubWeeklyData().catch(err => console.log(err))
+    }, 60000);
+
     return (
-        <Carousel interval={null} activeIndex={index} direction={direction} onSelect={handleSelect}>
+        <Carousel interval={null} activeIndex={index} direction={direction} onSelect={handleSelect} indicators={false}
+                  fade={true} pauseOnHover={false}>
             {
                 githubWeekData.map((obj, bIndex) => {
-                    return (
-                        <Carousel.Item key={bIndex}>
-                            <Paper style={{height: 'calc(100vh - 100px)'}}>
-                                <Title key={obj.module} title={obj.module}/>
-                                <StackedBars key={bIndex * 5} data={obj.projects}/>
-                            </Paper>
-                        </Carousel.Item>
-                    )
+                    return obj.projects.length > 0 ?
+                        (
+                            <Carousel.Item key={bIndex}>
+                                <Paper className={'main-screen'}>
+                                    <Title key={obj.module} title={obj.module}/>
+                                    <StackedBars key={bIndex * 5} data={obj.projects}/>
+                                </Paper>
+                            </Carousel.Item>
+                        ) : null
                 })
             }
             <Carousel.Item>
@@ -75,11 +85,14 @@ export const MiddleSuit = () => {
             </Carousel.Item>
             <Carousel.Item>
                 <Calendar amount={6} clientId={process.env.REACT_APP_GOOGLE_CLIENT}
-                          calendarId={process.env.REACT_APP_CALENDAR_STUDENTS} title={"CODECOOL EVENTS"}/>
+                          calendarId={process.env.REACT_APP_CALENDAR_STUDENTS} title={"CODECOOL EVENTS"}
+                          stars={'stars2'} twinkling={'twinkling2'} clouds={'clouds2'}/>
             </Carousel.Item>
             <Carousel.Item>
                 <Calendar amount={10} clientId={process.env.REACT_APP_GOOGLE_CLIENT}
-                          calendarId={process.env.REACT_APP_CALENDAR_CONSULTATION} title={"CODECOOL CONSULTATIONS"}/>
+                          calendarId={process.env.REACT_APP_CALENDAR_CONSULTATION} title={"CODECOOL CONSULTATIONS"}
+                          stars={'stars'} twinkling={'twinkling'} clouds={'clouds'}
+                          additional={"Check slots for consultations and ruthlessly use your favourite mentor!"}/>
             </Carousel.Item>
         </Carousel>
     )
