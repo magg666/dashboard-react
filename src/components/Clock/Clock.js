@@ -28,7 +28,7 @@ export default class Clock extends Component {
             hour: new Date().getHours(),
             minutes: new Date().getMinutes(),
             currentDay: null,
-            daysArray: ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'],
+            daysArray: ['SUNDAY', 'OH NO, MONDAY', 'ENGLISH DAY', "ODIN'S DAY", "THOR'S DAY", 'DEMO DAY', 'YAY, SATURDAY'],
             caption: "",
             currentTime: ""
         };

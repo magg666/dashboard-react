@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     background-color: black;
-    height: 100px;
+    height: 10vh;
     position: sticky;
     bottom: 0;
 
@@ -14,21 +14,27 @@
 }
 
 .time-text {
-    font-size: 50px;
+    font-size: 2em;
     color: #e59400;
     margin-left: 20px;
 }
 
 .days-text {
     color: #e59400;
-    font-size: 25px;
     padding-bottom: 0;
     margin-left: 20px;
 }
 
 .caption-text {
     color: #e59400;
-    font-size: 25px;
     float: right;
     margin-right: 20px;
+}
+
+@media screen and (max-width:1060px) {
+  .clock-container {
+      height: 5%;
+      position: sticky;
+      bottom: 0;
+  }
 }
