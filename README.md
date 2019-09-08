@@ -1,68 +1,141 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Codecool Dashboard II
+> Frontend part of project Codecool Dashboard.
+First part (frontend) you can find [here](https://github.com/magg666/dashboard-django)
 
-## Available Scripts
+## Table of contents
+* [General info](#general-info)
+* [Screenshots](#screenshots)
+* [Technologies](#technologies)
+* [Setup](#setup)
+* [Features](#features)
+* [Status](#status)
+* [Inspiration](#inspiration)
+* [Contact](#contact)
 
-In the project directory, you can run:
+## General info
+Project was created as tool to display different statistics, information and news for Codecool students.
+It displays:
+* Clock with customize captions about time of day
+* Image from Nasa Apod
+* Weather in Warsaw
+* Fun facts about numbers
+* Github weekly statistics for students' projects
+* Github total statistics for students' projects
+* Calendar events
+* Info about student's passed exams
 
-### `npm start`
+## Screenshots
+Calendar events:
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![Calendar page](./dashboard-f1.png)
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Page with various infos (yes, that is the image of my dog, not Nasa. It serves as backup image):
 
-### `npm test`
+![Info page](./dashboard-f2.png)
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Chart with Github statistic page:
 
-### `npm run build`
+![Chart page](./dashboard-f3.png)
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Technologies
+Main:
+* React
+* html, css
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Libraries:
+* Apexcharts
+* Material-ui
+* Bootstrap
+* Font Awesome
+* Google api (gapi)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Setup
+Use package.json to download all needed dependencies, npm runserver.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Code Examples
+Class based components:
+```javascript
+export default class WeatherWidget extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentDayWeather: {
+                time: null,
+                temperature: null,
+                summary: "",
+                icon: "",
+                humidity: null,
+                pressure: null,
+                windSpeed: null,
+            }
+        }
+    };
+```
+Functional components with Google api:
+```javascript
+export const Calendar = (props) => {
+    // initial state
+    let [eventsList, setEvents] = useState([]);
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    function handleClientLoad() {
+        gapi.load('client:auth2', checkAuth)
+    }
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    function checkAuth() {
+        gapi.auth2.authorize({
+            client_id: props.clientId,
+            scope: 'https://www.googleapis.com/auth/calendar',
+            immediate: true,
+            prompt: 'none'
+        }, handleAuthResult)
+    }
+```
+Custom hooks:
+```javascript
+export function useInterval(callback, delay) {
+        const savedCallback = useRef();
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
 
-## Learn More
+        useEffect(() => {
+            function tick() {
+                savedCallback.current();
+            }
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+            if (delay !== null) {
+                let id = setInterval(tick, delay);
+                return () => clearInterval(id);
+            }
+        }, [delay]);
+    }
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Features
+Codecool Dashboard uses:
+* Class based components
+* Functions components
+* Standard and custom hooks
+* External Apis
+* Customized and adapted charts
+* Reacts handling events
+* Css styling and animations
 
-### Code Splitting
+It is also adapted to displaying on monitors and tablets
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Status
+Project is finished, but I do not exclude the possibility of further developments.
 
-### Analyzing the Bundle Size
+## Inspiration
+Credits for:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+[Maciej Jankowski](https://github.com/maciejjankowski) - Codecool mentor - for idea and help. Thank you.
 
-### Making a Progressive Web App
+All Codecool mentors and student.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+And, of course and as always - StackOverflow... :)
 
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Contact
+Created by [Magda Wąsowicz](mailto:mw23127@gmail.com) - feel free to contact me!
