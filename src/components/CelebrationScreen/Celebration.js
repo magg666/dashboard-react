@@ -4,8 +4,14 @@ import {Paper} from "@material-ui/core";
 import './Celebration_style.css'
 import {getMonday} from "../utils";
 import {Title} from "../Title/Title";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faTrophy, faThumbsUp, faMedal, faAward} from '@fortawesome/free-solid-svg-icons'
 
-
+/**
+ * Component to read and display data from codecool google spreadsheet with data about passed exams
+ * @returns {*}
+ * @constructor
+ */
 export const Celebration = () => {
     // initial state
     let [students, setStudents] = useState([]);
@@ -14,9 +20,9 @@ export const Celebration = () => {
      * Asynchronously loads requested library and then
      * calls callback - checking authorisation
      */
-    function handleClientLoad() {
+    const handleClientLoad = () => {
         gapi.load('client:auth2', checkAuth)
-    }
+    };
 
     /**
      * Checks authorisation parameters, calls callback function on response
@@ -46,57 +52,99 @@ export const Celebration = () => {
     function makeApiCall() {
         gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: process.env.REACT_APP_SHEET_ID,
-            range: "A1:T"
+            range: "A:D"
         }).execute(res => {
-            setStudents(res.values)
+            setStudents(res['values'])
         });
     }
 
     /**
      * On mounting - calls calendar api
+     * Re-renders if students length changes
      */
     useEffect(() => {
         handleClientLoad()
         // eslint-disable-next-line
-    }, []);
+    }, [students.length]);
 
 
-    return (
+    /**
+     * Returns specific captions depends of kind exam student passed from last Monday
+     * @type {Function}
+     */
+    let celebrationOptions = ((studentData, index) => {
+        let lastMonday = getMonday(new Date());
+        let date = studentData[0];
+        let person = studentData[1];
+        let exam = studentData[2];
+        let module = studentData[3];
+        if (new Date(date.toString()) >= lastMonday) {
+            if (exam === 'PA') {
+                return (
+                    <p key={index}><FontAwesomeIcon icon={faAward}
+                                                    style={{color: 'yellow'}}/> {person} passed {exam} and now is
+                        in {module} module!</p>
+                )
+            } else if (exam === 'GO') {
+                return (
+                    <p key={index}><FontAwesomeIcon icon={faTrophy}
+                                                    style={{color: 'lightgreen'}}/> {person} was given {exam} status!
+                    </p>
+                )
+            } else if (exam === 'TRIAL') {
+                return (
+                    <p key={index}><FontAwesomeIcon icon={faMedal}
+                                                    style={{color: 'red'}}/> {person} passed through {exam}!</p>
+                )
+            } else {
+                return (
+                    <p key={index}><FontAwesomeIcon icon={faThumbsUp}
+                                                    style={{color: 'blue'}}/> {person} got a {exam}!</p>
+                )
+            }
+        } else {
+            return null
+        }
+    });
 
-        <Paper className={'celebration'} style={{height: 'calc(100vh - 100px)'}}>
-            <div className="pyro">
-                <div className="before"/>
-                <div className="after"/>
-                <div style={{color: 'white', textAlign: 'center', fontSize: 20, padding: 30}}>
-                    <Title title={"Let's celebrate!"}/>
-                    {
-                        students.splice(1).map((obj, index) => {
-                                let lastMonday = getMonday(new Date());
-                                if (new Date(obj[0].toString()) >= lastMonday) {
-                                    if(obj[2] === 'PA'){
-                                        return (
-                                        <p key={index}>{obj[1]} passed {obj[2]} and now is in {obj[3]} module!</p>
-                                    )
-                                    }else if(obj[2] === 'GO'){
-                                        return (
-                                        <p key={index}>{obj[1]} was given {obj[2]} status!</p>
-                                        )
-                                    } else if(obj[2] === 'TRIAL'){
-                                        return (
-                                        <p key={index}>{obj[1]} passed through {obj[2]}!</p>
-                                        )
-                                    } else if(obj[2] === 'JOB'){
-                                        return (
-                                        <p key={index}>{obj[1]} got a {obj[2]}!</p>
-                                        )
-                                    }
+    /**
+     * Renders students celebration screen.
+     */
+    if (students.length > 0) {
+        return (
+            <Paper className={'main-screen'} style={{backgroundColor: "black"}}>
+                <div className="pyro">
+                    <div className="before"/>
+                    <div className="after"/>
+                    <div style={{color: 'white', textAlign: 'center', fontSize: '3vh'}}>
+                        <Title title={"LET'S CELEBRATE!"}/>
+                    </div>
+                    <div style={{textAlign: 'center', marginTop: 20}}>
+                        {
+                            students.splice(1).map((obj, index) => {
+                                    return celebrationOptions(obj, index)
                                 }
-                            }
-                        )
-                    }
+                            )
+                        }
+                    </div>
                 </div>
-            </div>
-        </Paper>
-    )
+            </Paper>
+        )
+    } else {
+        return (
+            <Paper className={'main-screen'} style={{backgroundColor: "black"}}>
+                <div className="pyro">
+                    <div className="before"/>
+                    <div className="after"/>
+                    <div style={{color: 'white', textAlign: 'center', fontSize: '3vh'}}>
+                        <Title title={"You are awesome!"}/>
+                        <p>If you can't celebrate your success, appreciate your failure. </p>
+                        <p>Since life is all about celebration and appreciation.</p>
+                    </div>
+                </div>
+            </Paper>
+        )
+    }
+
 };
 
