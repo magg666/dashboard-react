@@ -42,7 +42,7 @@ class App extends Component {
                     <Clock/>
                 </React.Fragment>
             )
-        } else if (day === 0) {
+        } else if (day === 5) {
             return (
                 <React.Fragment>
                     <FinishSuit/>
