@@ -35,8 +35,8 @@ export const Calendar = (props) => {
         gapi.auth2.authorize({
             client_id: props.clientId,
             scope: 'https://www.googleapis.com/auth/calendar',
-            // immediate: true,
-            // prompt: 'none'
+            immediate: true,
+            prompt: 'none'
         }, handleAuthResult)
     }
 

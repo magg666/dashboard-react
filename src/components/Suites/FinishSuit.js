@@ -73,7 +73,7 @@ export const FinishSuit = () => {
     }
 
     return (
-        <Carousel interval={null} activeIndex={index} direction={direction} onSelect={handleSelect} indicators={false}
+        <Carousel interval={15000} activeIndex={index} direction={direction} onSelect={handleSelect} indicators={false}
                   fade={true} pauseOnHover={false}>
             {
                 githubTotalData.map((obj, bIndex) => {
