@@ -105,35 +105,39 @@ export const sortBy = (function () {
  * @returns {Date}
  */
 export function getMonday(dateString) {
-  dateString = new Date(dateString);
-  let day = dateString.getDay(),
-      diff = dateString.getDate() - day + (day === 0 ? -6 : 1);
-  return new Date(dateString.setDate(diff));
+    dateString = new Date(dateString);
+    let day = dateString.getDay(),
+        diff = dateString.getDate() - day + (day === 0 ? -6 : 1);
+    let lastMonday = new Date(dateString.setDate(diff));
+    lastMonday.setHours(0);
+    lastMonday.setMinutes(0);
+    lastMonday.setSeconds(0);
+    return lastMonday
 }
 
-    /**
-     * useInterval Hook sets up an interval and clears it after unmounting
-     * credits: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
-     * @param callback
-     * @param delay
-     */
+/**
+ * useInterval Hook sets up an interval and clears it after unmounting
+ * credits: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
+ * @param callback
+ * @param delay
+ */
 export function useInterval(callback, delay) {
-        const savedCallback = useRef();
+    const savedCallback = useRef();
 
-        // Remember the latest callback.
-        useEffect(() => {
-            savedCallback.current = callback;
-        }, [callback]);
+    // Remember the latest callback.
+    useEffect(() => {
+        savedCallback.current = callback;
+    }, [callback]);
 
-        // Set up the interval.
-        useEffect(() => {
-            function tick() {
-                savedCallback.current();
-            }
+    // Set up the interval.
+    useEffect(() => {
+        function tick() {
+            savedCallback.current();
+        }
 
-            if (delay !== null) {
-                let id = setInterval(tick, delay);
-                return () => clearInterval(id);
-            }
-        }, [delay]);
-    }
+        if (delay !== null) {
+            let id = setInterval(tick, delay);
+            return () => clearInterval(id);
+        }
+    }, [delay]);
+}

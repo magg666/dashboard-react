@@ -78,7 +78,8 @@ export const Celebration = () => {
         let person = studentData[1];
         let exam = studentData[2];
         let module = studentData[3];
-        if (new Date(date.toString()) >= lastMonday.getDate()) {
+
+        if (new Date(date) >= lastMonday) {
             if (exam === 'PA') {
                 return (
                     <p key={index}><FontAwesomeIcon icon={faAward}
