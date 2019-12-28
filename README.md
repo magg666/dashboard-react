@@ -4,13 +4,23 @@
 Project was created as tool to display different statistics, information and news for Codecool students.
 Created to practice working with React DOM, React components (class-based and functional), hooks, states and lifecycles.
 
+Codecool Dashboard uses:
+* Class based components
+* Functions components
+* Standard and custom hooks
+* External Apis
+* Customized and adapted charts
+* Reacts handling events
+* Css styling and animations
+
+It is also adapted to displaying on monitors and tablets
 
 ## Table of contents
 * [General info](#general-info)
 * [Screenshots](#screenshots)
 * [Technologies](#technologies)
 * [Setup](#setup)
-* [Features](#features)
+* [Code Examples](#code-examples)
 * [Status](#status)
 * [Inspiration](#inspiration)
 * [Contact](#contact)
@@ -115,18 +125,6 @@ export function useInterval(callback, delay) {
         }, [delay]);
     }
 ```
-
-## Features
-Codecool Dashboard uses:
-* Class based components
-* Functions components
-* Standard and custom hooks
-* External Apis
-* Customized and adapted charts
-* Reacts handling events
-* Css styling and animations
-
-It is also adapted to displaying on monitors and tablets
 
 ## Status
 Project is finished, but I do not exclude the possibility of further developments.
