@@ -1,6 +1,9 @@
 # Codecool Dashboard II
 > Frontend part of project Codecool Dashboard.
-First part (frontend) you can find [here](https://github.com/magg666/dashboard-django)
+
+Project was created as tool to display different statistics, information and news for Codecool students.
+Created to practice working with React DOM, React components (class-based and functional), hooks, states and lifecycles.
+
 
 ## Table of contents
 * [General info](#general-info)
@@ -13,8 +16,7 @@ First part (frontend) you can find [here](https://github.com/magg666/dashboard-d
 * [Contact](#contact)
 
 ## General info
-Project was created as tool to display different statistics, information and news for Codecool students.
-It displays:
+Project displays:
 * Clock with customize captions about time of day
 * Image from Nasa Apod
 * Weather in Warsaw
@@ -23,6 +25,7 @@ It displays:
 * Github total statistics for students' projects
 * Calendar events
 * Info about student's passed exams
+First part (frontend) you can find [here](https://github.com/magg666/dashboard-django)
 
 ## Screenshots
 Calendar events:
